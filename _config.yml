@@ -9,7 +9,7 @@ baseurl: ''
 
 author:
   name: 'ISAK.M'
-  github_username:  ISAKEM
+  github_username: ISAKEM
 
 defaults:
   -
@@ -38,3 +38,5 @@ kramdown:
 
 plugins: ['jekyll-paginate']
 exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
+
+remote_theme: joshgerdes/jekyll-uno
