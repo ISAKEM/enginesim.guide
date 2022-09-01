@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		
+		
+		<link rel="shortcut icon" href="../img/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>Atlast, creation of an engine - enginesim.guide</title>
+		<link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/font-awesome-5.12.2-all.min.css" rel="stylesheet">
+		<link href="../css/base.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/highlight-github.css">
+		<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="../js/highlight.pack.js"></script>
+		
+		<script>
+			var base_url = '..';
+			var home_url = '../home';
+			var is_outer_page = false;
+			
+			var pageToc = [
+				{title: "Creation of an engine", url: "#_top", children: [
+						
+				{title: "The Distributor", url: "#_top", children: [
+				]},
+				{title: "The Camshaft Lobes", url: "#the-camshaft-lobes", children: [
+				]},
+				{title: "The Cylinder Banks", url: "#the-cylinder-banks", children: [
+				]},
+				{title: "The Rod Journals", url: "#the-rod-journals", children: [
+				]},
+				]},
+			];
+
+		</script>
+		<script src="../js/base.js"></script> 
+	</head>
+
+	<body class="inner-page">
+		
+
+		<div class="container-fluid wm-page-content">
+			<a name="_top" aria-hidden="true"></a>
+			
+
+
+
+
+
+
+<div class="row pt-2 pb-4">
+	<div class="col-sm text-center text-sm-left">
+		<a href="../structure_of_an_engine_file/" class="btn btn-sm btn-outline-dark">
+			<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			Previous
+		</a>
+		<a href="../structure_of_an_engine_file/" class="btn btn-sm btn-link">
+			The Structure of an Engine file
+		</a>
+	</div>
+	
+
+	
+	<div class="col-sm text-center text-sm-right">
+		<a href="../tuning/" class="btn btn-sm btn-link">
+			Tuning
+		</a>
+		<a href="../tuning/" class="btn btn-sm btn-outline-dark">
+			Next
+			<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		</a>
+	</div>
+	
+</div>
+
+			
+
+			<h1 id="creation-of-an-engine">Creation of an engine</h1>
+<p>I am just rly quickly going to go thru the basics of getting an engine to run here OK, nothing too fancy.
+To start off to get an engine to run all u need is correct<br />
+Distributor:<br />
+<img alt="" src="../distributor.png" /><br />
+Camshaft lobes:<br />
+<img alt="" src="../camshaftlobes.png" /><br />
+Rod Journals:<br />
+<img alt="" src="../rodjournals.png" /><br />
+And last, cylinder banks:<br />
+<img alt="" src="../cylinderbank1.png" />
+<img alt="" src="../cylinderbank2.png" />  </p>
+<h5 id="the-distributor">The Distributor</h5>
+<p>The number 1 rule is that 1 full cycle of a combustion engine is 720 degrees of crankshaft rotation.<br />
+This means that 720 / [number of cylinders] is how u calculate your firing interval.<br />
+The firing interval is very important, if u get it wrong your engine will NEVER work.<br />
+The pictures I have here are actually a bad example bcs this is an uneven firing engine making it more complicated so we wont do that now.<br />
+Instead I am going to show an even firing engine where 720 / [number of cylinders] is actually true.<br />
+<img alt="" src="../firingorder.png" /><br />
+This shows that since this is a V10 the engine wants to fire a cylinder every 72 degrees. I have put the wires in the correct firing order of the engine and then just increment by cycles of 72 degrees until the last cylinder where the crankshaft is at 648 degrees and then it starts over at 0. 0 and 720 is the same value since above we have declared that 1 cycle is 720 degrees:<br />
+<img alt="" src="../1cycle.png" />  </p>
+<h5 id="the-camshaft-lobes">The Camshaft Lobes</h5>
+<p><img alt="" src="../camlobes.png" /><br />
+This also follows your firing order and it is going to open every 72 degrees on this V10. Since the firing order of this engine is 1-2-3-4-7-8-9-10-5-6 the increments of 72 are in that order:<br />
+<img alt="" src="../cylindernumberinglobes.png" /><br />
+The numbers on the side is the cylinder numbering. As u can see we start at 0 on cylinder 1 then +1 on cylinder number 2, +2 on cylinder number 3 and so on. Always incrementing by 72.<br />
+<strong>The numbers on the side(+0.05 and -0.07) do NOT matter</strong><br />
+They are just there to make the engine sound better.</p>
+<h5 id="the-cylinder-banks">The Cylinder Banks</h5>
+<p><img alt="" src="../cylinderbank1lr1.png" /><br />
+With the cylinder banks we specify the amount of cylinders we have, wires are set based on cylinder numbering so for this bank we have 1, 3, 5, 7 and 9. rod journals are also set based on the firing order. Here my rod journals are labeled rj0, rj2, rj4, rj6 and rj8 which might make it more difficult to understand im sry.<br />
+Anyways rj0 is here connected to both pistons 1 and 2, rj2 is connected to 3 and 4, rj4 is connected to 5 and 6, rj6 is connected to 7 and 8 and finally rj8 is connected to 9 and 10.
+<img alt="" src="../cylinderbank1lr2.png" /></p>
+<h5 id="the-rod-journals">The Rod Journals</h5>
+<p><img alt="" src="../rodjournals1lr.png" /><br />
+Since the cams spin twice the speed of the crank, the rod journals are incremented by 144 because 72 * 2 = 144 so for you it will be [firing interval] * 2.<br />
+Then to have this be correct we take a look at our firing order again: 1-2-3-4-7-8-9-10-5-6.<br />
+So since rj0 is connected to 1 and 2 and the firing order starts with 1 and 2 we want to have rj0 at 0 degrees.<br />
+Then rj2 is connected to 3 and 4 so we want rj2 at 144 degrees.<br />
+Then we have a bit of a conflict here, rj4 is connected to 5 and 6 but out firing order says we fire 7 and 8 so then we will increment rj6 by 144 instead since rj6 is connected to 7 and 8.<br />
+Then u just follow the rest of this order and you are done.  </p>
+<p>If u followed this and understood it, your engine should now atleast run.
+<img alt="" src="../exhaustflow.png" /><br />
+U will know it is correct when u get mountains and valleys as the exhaust flow just like this. <br />
+Since this is a V10 I have 10 mountains here. A V8 will have 8 mountains and so on.</p>
+
+			<br>
+			
+
+
+
+
+
+
+<div class="row pt-2 pb-4">
+	<div class="col-sm text-center text-sm-left">
+		<a href="../structure_of_an_engine_file/" class="btn btn-sm btn-outline-dark">
+			<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			Previous
+		</a>
+		<a href="../structure_of_an_engine_file/" class="btn btn-sm btn-link">
+			The Structure of an Engine file
+		</a>
+	</div>
+	
+
+	
+	<div class="col-sm text-center text-sm-right">
+		<a href="../tuning/" class="btn btn-sm btn-link">
+			Tuning
+		</a>
+		<a href="../tuning/" class="btn btn-sm btn-outline-dark">
+			Next
+			<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		</a>
+	</div>
+	
+</div>
+
+			<br>
+		</div>
+
+		<footer class="container-fluid wm-page-content text-center small">
+			<details>
+				<summary>
+					Documentation built with <a href="http://www.mkdocs.org/" target="_blank">MkDocs</a> using  <a href="https://github.com/Siphalor/mkdocs-custommill" target="_blank">CustomMill</a>.
+				</summary>
+				<h6 class="mt-2">Additional Licenses</h6>
+				<ul><li>
+						CustomMill is based on the <a href="https://github.com/gristlabs/mkdocs-windmill" target="_blank">Windmill</a> theme by Grist Labs, licensed under the <a href="https://github.com/gristlabs/mkdocs-windmill/blob/master/LICENSE" target="_blank">MIT License</a>
+					</li>
+					<li>
+						CustomMill includes <a href="https://getbootstrap.com" target="_blank">Bootstrap</a> version 5.1.3. This is available under the <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a>.
+					</li>
+					<li>
+						Syntax highlighting is implemented via <a href="https://highlightjs.org" target="_blank">highlight.js</a> licensed under the BSD 3-Clause License and the included github styling made by Vasily Polovnyov.
+					</li>
+					<li>
+						Icons on this site are from <a href="https://fontawesome.com/" target="_blank">Font Awesome</a> which is licensed under the <a href="https://fontawesome.com/license/free" target="_blank">Font Awesome Free License</a>.
+					</li></ul>
+				<p>Built at 2022-09-01 00:09:20 UTC</p>
+			</details>
+		</footer>
+
+		
+	</body>
+</html>

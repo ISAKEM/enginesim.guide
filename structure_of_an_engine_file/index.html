@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		
+		
+		<link rel="shortcut icon" href="../img/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>The Structure of an Engine file - enginesim.guide</title>
+		<link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/font-awesome-5.12.2-all.min.css" rel="stylesheet">
+		<link href="../css/base.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/highlight-github.css">
+		<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="../js/highlight.pack.js"></script>
+		
+		<script>
+			var base_url = '..';
+			var home_url = '../home';
+			var is_outer_page = false;
+			
+			var pageToc = [
+				{title: "The structure of an engine file", url: "#_top", children: [
+						
+				{title: "Calling files", url: "#_top", children: [
+				]},
+				{title: "Labels", url: "#labels", children: [
+				]},
+				{title: "Distributor", url: "#distributor", children: [
+				]},
+				{title: "Wires", url: "#wires", children: [
+				]},
+				{title: "Sym Sample", url: "#sym-sample", children: [
+				]},
+				{title: "Lobe Profiles", url: "#lobe-profiles", children: [
+				]},
+				{title: "Camshaft", url: "#camshaft", children: [
+				]},
+				{title: "Flow Sample", url: "#flow-sample", children: [
+				]},
+				{title: "Engine Head", url: "#engine-head", children: [
+				]},
+				{title: "Intake", url: "#intake", children: [
+				]},
+				{title: "Main Engine", url: "#main-engine", children: [
+				]},
+				]},
+			];
+
+		</script>
+		<script src="../js/base.js"></script> 
+	</head>
+
+	<body class="inner-page">
+		
+
+		<div class="container-fluid wm-page-content">
+			<a name="_top" aria-hidden="true"></a>
+			
+
+
+
+
+
+
+<div class="row pt-2 pb-4">
+	<div class="col-sm text-center text-sm-left">
+		<a href="../basics_of_engine_creation/" class="btn btn-sm btn-outline-dark">
+			<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			Previous
+		</a>
+		<a href="../basics_of_engine_creation/" class="btn btn-sm btn-link">
+			Basics of Engine Creation
+		</a>
+	</div>
+	
+
+	
+	<div class="col-sm text-center text-sm-right">
+		<a href="../creation_of_an_engine/" class="btn btn-sm btn-link">
+			Atlast, creation of an engine
+		</a>
+		<a href="../creation_of_an_engine/" class="btn btn-sm btn-outline-dark">
+			Next
+			<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		</a>
+	</div>
+	
+</div>
+
+			
+
+			<h1 id="the-structure-of-an-engine-file">The structure of an engine file</h1>
+<h4 id="calling-files">Calling files</h4>
+<p><img alt="" src="../calling.png" /><br />
+This right here is how every engine file starts. By importing <code>engine_sim.mr</code>, calling units aswell as constants.<br />
+The impulse library also gets loaded.<br />
+Everything I am going to show here just like this CANNOT be excluded or it will NOT work.</p>
+<h4 id="labels">Labels</h4>
+<p><img alt="" src="../labels.png" /><br />
+Directly after calling these files u want to declare your labels, labels are basically variables as far as I understand and they simplify making neccesary calculations.</p>
+<h4 id="distributor">Distributor</h4>
+<p><img alt="" src="../distributor.png" /><br />
+The distributor as its name suggests distributes sparks between the cylinders.</p>
+<h4 id="wires">Wires</h4>
+<p><img alt="" src="../wires.png" /><br />
+Wires is just a declaration of the ignition wires.</p>
+<h4 id="sym-sample">Sym Sample</h4>
+<p><img alt="" src="../symsample.png" /><br />
+I am not sure what this is but my guess is that it is how the audio synthesizing is sampled(?)</p>
+<h4 id="lobe-profiles">Lobe Profiles</h4>
+<p><img alt="" src="../lobeprofiles.png" /><br />
+This is where the degrees for your cams can be set.</p>
+<h4 id="camshaft">Camshaft</h4>
+<p><img alt="" src="../camshaft.png" /><br />
+The camshaft is where u can set lobe seperation, ignition advance/retardation, base radius of the camshaft etc.<br />
+Once again labels have to be declared here as it cant accesss the labels that were declared earler.<br />
+The camshaft is mainly where u set every individual cam lobe that has to follow your engines firing order.</p>
+<h4 id="flow-sample">Flow Sample</h4>
+<p><img alt="" src="../flowsample.png" /><br />
+Flow Sample is just a declaration for flow samples.</p>
+<h4 id="engine-head">Engine Head</h4>
+<p><img alt="" src="../enginehead.png" /><br />
+This is where the flow samples come into play, this is where u can tune the flow of fuel in the intake. I dont know much exactly how this works but basically higher number = more power.</p>
+<h4 id="intake">Intake</h4>
+<p><img alt="" src="../intake.png" /><br />
+This is your intake, the intake also includes the "carburetor" so u can change its parameters here. Plenum size and idle throttle position can be changed here too aswell as other things.</p>
+<h4 id="main-engine">Main Engine</h4>
+<p><img alt="" src="../engine.png" /><br />
+This is where the engine "starts". U can change the engine name, redline, starter speed and torque + u can also change fuel parameters here.
+Wires below just tells the engine to use the wires that are already declared.</p>
+<h5 id="crankshaft">Crankshaft</h5>
+<p><img alt="" src="../crankshaft.png" /><br />
+Just all the parameters for your crankshaft.</p>
+<h5 id="rod-journals">Rod Journals</h5>
+<p><img alt="" src="../rodjournals.png" /><br />
+Your rod journals and their angles get declared here.</p>
+<h5 id="pistons">Pistons</h5>
+<p><img alt="" src="../pistons.png" /><br />
+Parameters for your pistons.</p>
+<h5 id="connecting-rods">Connecting Rods</h5>
+<p><img alt="" src="../connectingrods.png" /><br />
+Parameters for your connecting rods.</p>
+<h5 id="cylinder-bank-parameters">Cylinder Bank Parameters</h5>
+<p><img alt="" src="../cylinderbanks.png" /><br />
+Parameters for your cylinder bank/s.</p>
+<h5 id="intake_1">Intake</h5>
+<p><img alt="" src="../intake2.png" /><br />
+Same as before its just using the same intake but changing its variables.</p>
+<h5 id="exhaust">Exhaust</h5>
+<p><img alt="" src="../exhaust.png" /><br />
+Exhaust System aswell as audio for the exhaust system at the bottom. Volume, flow rate, tube length and velocity decay can be set here.<br />
+Dont touch the audio part for now OK.</p>
+<h5 id="cylinder-banks">Cylinder Banks</h5>
+<p><img alt="" src="../cylinderbank1.png" />
+<img alt="" src="../cylinderbank2.png" /><br />
+If u have an inline engine u would only have 1 cylinder bank but this is a V engine so it has 2. All your cylinders are right here.
+<img alt="" src="../add.png" /><br />
+This is just telling the engine that u have these 2 cylinder banks and a crankshaft.</p>
+<h5 id="harmonic-cam-lobe">Harmonic Cam Lobe</h5>
+<p><img alt="" src="../harmoniccam.png" /><br />
+I actually dont know what this is, But judging by its name I would guess its an extra cam lobe that is harmonic to the rest. Meaning it has a relation opposite of the other cam lobes. Idk im clueless.
+<img alt="" src="../add2.png" /><br />
+This tells the engine to use the lobe profiles from earlier and the cylinder head on both cylinder banks.</p>
+<h5 id="timing-curve">Timing Curve</h5>
+<p><img alt="" src="../timingcurve.png" /><br />
+This is the timing curve of your ignition. This can make u alot of power.</p>
+<h5 id="ignition-module">Ignition Module</h5>
+<p><img alt="" src="../ignitionmodule.png" /><br />
+This just tells the engine to use the distributor from earlier.</p>
+
+			<br>
+			
+
+
+
+
+
+
+<div class="row pt-2 pb-4">
+	<div class="col-sm text-center text-sm-left">
+		<a href="../basics_of_engine_creation/" class="btn btn-sm btn-outline-dark">
+			<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			Previous
+		</a>
+		<a href="../basics_of_engine_creation/" class="btn btn-sm btn-link">
+			Basics of Engine Creation
+		</a>
+	</div>
+	
+
+	
+	<div class="col-sm text-center text-sm-right">
+		<a href="../creation_of_an_engine/" class="btn btn-sm btn-link">
+			Atlast, creation of an engine
+		</a>
+		<a href="../creation_of_an_engine/" class="btn btn-sm btn-outline-dark">
+			Next
+			<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		</a>
+	</div>
+	
+</div>
+
+			<br>
+		</div>
+
+		<footer class="container-fluid wm-page-content text-center small">
+			<details>
+				<summary>
+					Documentation built with <a href="http://www.mkdocs.org/" target="_blank">MkDocs</a> using  <a href="https://github.com/Siphalor/mkdocs-custommill" target="_blank">CustomMill</a>.
+				</summary>
+				<h6 class="mt-2">Additional Licenses</h6>
+				<ul><li>
+						CustomMill is based on the <a href="https://github.com/gristlabs/mkdocs-windmill" target="_blank">Windmill</a> theme by Grist Labs, licensed under the <a href="https://github.com/gristlabs/mkdocs-windmill/blob/master/LICENSE" target="_blank">MIT License</a>
+					</li>
+					<li>
+						CustomMill includes <a href="https://getbootstrap.com" target="_blank">Bootstrap</a> version 5.1.3. This is available under the <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a>.
+					</li>
+					<li>
+						Syntax highlighting is implemented via <a href="https://highlightjs.org" target="_blank">highlight.js</a> licensed under the BSD 3-Clause License and the included github styling made by Vasily Polovnyov.
+					</li>
+					<li>
+						Icons on this site are from <a href="https://fontawesome.com/" target="_blank">Font Awesome</a> which is licensed under the <a href="https://fontawesome.com/license/free" target="_blank">Font Awesome Free License</a>.
+					</li></ul>
+				<p>Built at 2022-09-01 00:09:20 UTC</p>
+			</details>
+		</footer>
+
+		
+	</body>
+</html>
